@@ -14,4 +14,4 @@ const updatePrice = async () => {
   await bot.setChatTitle(groupId, `${groupName} (${price})`);
 };
 
-setInterval(updatePrice, 5000);
+updatePrice();
