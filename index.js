@@ -11,7 +11,10 @@ const updatePrice = async () => {
   const { data } = await res.json();
 
   const price = parseFloat(data.price).toFixed(8);
-  await bot.setChatTitle(groupId, `${groupName} (${price})`);
+
+  const date = new Date();
+
+  await bot.setChatTitle(groupId, `${groupName} (${price}, ${date.getHours() + 2}:${date.getMinutes()})`);
 };
 
 updatePrice();
