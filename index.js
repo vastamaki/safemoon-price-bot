@@ -12,9 +12,13 @@ const updatePrice = async () => {
 
   const price = parseFloat(data.price).toFixed(8);
 
-  const date = new Date();
+  const date = new Date(new Date().toLocaleString("en-US", {
+    timeZone: "Europe/Helsinki",
+  }));
 
-  await bot.setChatTitle(groupId, `${groupName} (${price}, ${date.getHours() + 2}:${date.getMinutes()})`);
+  const minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+
+  await bot.setChatTitle(groupId, `${groupName} (${price}, ${date.getHours()}:${minutes})`);
 };
 
 updatePrice();
