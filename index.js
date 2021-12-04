@@ -18,7 +18,7 @@ const updatePrice = async () => {
 
   const minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
 
-  await bot.setChatTitle(groupId, `${groupName} (${price}, ${date.getHours()}:${minutes})`);
+  await bot.setChatTitle(groupId, `${groupName} (${price.replace("0.00000", "")}, ${date.getHours()}:${minutes})`);
 };
 
 updatePrice();
