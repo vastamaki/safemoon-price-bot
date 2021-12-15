@@ -771,7 +771,7 @@ This script simply comunicates with the smart contract deployed by pancakeswap a
 function that was build to retrive the token prices
 */
 const getPrice = async () => {
-  const tokenAddres = "0x8076c74c5e3f5852037f31ff0093eeb8c8add8d3"; // change this with the token addres that you want to know the
+  const tokenAddres = "0x42981d0bfbaf196529376ee702f2a9eb9092fcb5"; // change this with the token addres that you want to know the
   let bnbPrice = await calcBNBPrice(); // query pancakeswap to get the price of BNB in USDT
   console.log(`CURRENT BNB PRICE: ${bnbPrice}`);
   // Them amount of tokens to sell. adjust this value based on you need, you can encounter errors with high supply tokens when this value is 1.

@@ -7,7 +7,7 @@ const bot = new TelegramBot(token, { polling: false });
 
 const updatePrice = async () => {
   const web3price = await getPrice();
-  const price = parseFloat(web3price).toFixed(8);
+  const price = parseFloat(web3price).toFixed(5)
 
   const date = new Date(
     new Date().toLocaleString("en-US", {
