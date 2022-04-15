@@ -1,7 +1,9 @@
 import TelegramBot from "node-telegram-bot-api"
 import fetch from "node-fetch"
 
-import { token, groupId, groupName, moralisApiKey } from "./secrets.json";
+import secrets from "./secrets.json";
+
+const { token, groupId, groupName, moralisApiKey } = secrets;
 
 const bot = new TelegramBot(token, { polling: false });
 
