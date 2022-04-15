@@ -1,13 +1,21 @@
-const TelegramBot = require("node-telegram-bot-api");
-const { token, groupId, groupName } = require("./secrets.json");
+import TelegramBot from "node-telegram-bot-api"
+import fetch from "node-fetch"
 
-const { getPrice } = require("./price");
+import { token, groupId, groupName, moralisApiKey } from "./secrets.json";
 
 const bot = new TelegramBot(token, { polling: false });
 
 const updatePrice = async () => {
-  const web3price = await getPrice();
-  const price = parseFloat(web3price).toFixed(5)
+  const res = await fetch(`https://deep-index.moralis.io/api/v2/erc20/0x42981d0bfbAf196529376EE702F2a9Eb9092fcB5/price?chain=bsc`, {
+    method: "GET",
+    headers: {
+      "X-API-KEY": moralisApiKey
+    }
+  })
+
+  const data = await res.json();
+
+  const price = data.usdPrice.toFixed(5);
 
   const date = new Date(
     new Date().toLocaleString("en-US", {
