@@ -1,9 +1,9 @@
+import 'dotenv/config'
+
 import TelegramBot from "node-telegram-bot-api"
 import fetch from "node-fetch"
 
-import secrets from "./secrets.json";
-
-const { token, groupId, groupName, moralisApiKey } = secrets;
+const { token, groupId, groupName, moralisApiKey } = process.env;
 
 const bot = new TelegramBot(token, { polling: false });
 
