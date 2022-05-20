@@ -1,23 +1,20 @@
-import 'dotenv/config'
+import "dotenv/config";
 
-import TelegramBot from "node-telegram-bot-api"
-import fetch from "node-fetch"
+import TelegramBot from "node-telegram-bot-api";
+import fetch from "node-fetch";
 
-const { token, groupId, groupName, moralisApiKey } = process.env;
+const { token, groupId, groupName } = process.env;
 
 const bot = new TelegramBot(token, { polling: false });
 
 const updatePrice = async () => {
-  const res = await fetch(`https://deep-index.moralis.io/api/v2/erc20/0x42981d0bfbAf196529376EE702F2a9Eb9092fcB5/price?chain=bsc`, {
-    method: "GET",
-    headers: {
-      "X-API-KEY": moralisApiKey
-    }
-  })
+  const res = await fetch(
+    `https://api.dexscreener.com/latest/dex/pairs/bsc/0x856a1c95bef293de7367b908df2b63ba30fbdd59`
+  );
 
-  const data = await res.json();
+  const { pairs } = await res.json();
 
-  const price = data.usdPrice.toFixed(5);
+  const price = pairs[0].priceUsd;
 
   const date = new Date(
     new Date().toLocaleString("en-US", {
@@ -30,10 +27,7 @@ const updatePrice = async () => {
 
   await bot.setChatTitle(
     groupId,
-    `${groupName} (${price.replace(
-      "0.00000",
-      ""
-    )}, ${date.getHours()}:${minutes})`
+    `${groupName} (${price}, ${date.getHours()}:${minutes})`
   );
 };
 
