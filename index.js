@@ -29,8 +29,6 @@ const updatePrice = async () => {
     groupId,
     `${groupName} (${price}, ${date.getHours()}:${minutes})`
   );
-
-  process.kill(process.pid, 'SIGTERM');
 };
 
 updatePrice();
