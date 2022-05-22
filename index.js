@@ -14,7 +14,7 @@ const updatePrice = async () => {
 
   const { pairs } = await res.json();
 
-  const price = pairs[0].priceUsd;
+  const price = parseFloat(pairs[0].priceUsd).toFixed(6);
 
   const date = new Date(
     new Date().toLocaleString("en-US", {
@@ -29,6 +29,8 @@ const updatePrice = async () => {
     groupId,
     `${groupName} (${price}, ${date.getHours()}:${minutes})`
   );
+
+  process.kill(process.pid, 'SIGTERM');
 };
 
 updatePrice();
