@@ -2,12 +2,19 @@ import "dotenv/config";
 
 import TelegramBot from "node-telegram-bot-api";
 import fetch from "node-fetch";
+import schedule from "node-schedule";
 
 const { token, groupId, groupName } = process.env;
 
-const bot = new TelegramBot(token, { polling: false });
+const bot = new TelegramBot(token, { polling: true });
 
-const updatePrice = async () => {
+bot.addListener("message", (msg) => {
+  if (msg.from.username === "sfm_title_price_bot") {
+    bot.deleteMessage(msg.chat.id, msg.message_id);
+  }
+});
+
+schedule.scheduleJob("0 * * * *", async function () {
   const res = await fetch(
     `https://api.dexscreener.com/latest/dex/pairs/bsc/0x856a1c95bef293de7367b908df2b63ba30fbdd59`
   );
@@ -29,6 +36,4 @@ const updatePrice = async () => {
     groupId,
     `${groupName} (${price}, ${date.getHours()}:${minutes})`
   );
-};
-
-updatePrice();
+});
