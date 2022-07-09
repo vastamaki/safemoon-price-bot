@@ -12,9 +12,13 @@ bot.addListener("message", (msg) => {
   if (msg.from.username === "sfm_title_price_bot") {
     bot.deleteMessage(msg.chat.id, msg.message_id);
   }
+
+  if (msg.text === "price") {
+    await updatePrice()
+  }
 });
 
-schedule.scheduleJob("0 * * * *", async function () {
+const updatePrice = async function () {
   const res = await fetch(
     `https://api.dexscreener.com/latest/dex/pairs/bsc/0x856a1c95bef293de7367b908df2b63ba30fbdd59`
   );
@@ -36,4 +40,6 @@ schedule.scheduleJob("0 * * * *", async function () {
     groupId,
     `${groupName} (${price}, ${date.getHours()}:${minutes})`
   );
-});
+}
+
+schedule.scheduleJob("0 * * * *", updatePrice);
