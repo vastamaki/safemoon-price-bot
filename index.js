@@ -13,8 +13,9 @@ bot.addListener("message", async (msg) => {
     bot.deleteMessage(msg.chat.id, msg.message_id);
   }
 
-  if (msg.text === "price") {
+  if (msg.text.toLocaleLowerCase() === "price") {
     await updatePrice();
+    bot.deleteMessage(msg.chat.id, msg.message_id);
   }
 });
 
