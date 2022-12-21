@@ -21,7 +21,7 @@ bot.addListener("message", async (msg) => {
 
 const updatePrice = async () => {
   const res = await fetch(
-    `https://api.dexscreener.com/latest/dex/pairs/bsc/0x856a1c95bef293de7367b908df2b63ba30fbdd59`
+    `https://api.dexscreener.com/latest/dex/pairs/bsc/0x8e0301e3bde2397449fef72703e71284d0d149f1`
   );
 
   const { pairs } = await res.json();
