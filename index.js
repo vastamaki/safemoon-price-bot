@@ -8,14 +8,22 @@ const { TG_TOKEN, TG_GROUP_ID, TG_GROUP_NAME } = process.env;
 
 const bot = new TelegramBot(TG_TOKEN, { polling: true });
 
+const deleteMessage = async (chatId, messageId) => {
+  try {
+    await bot.deleteMessage(chatId, messageId);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 bot.addListener("message", async (msg) => {
   if (msg.from.username === "sfm_title_price_bot") {
-    bot.deleteMessage(msg.chat.id, msg.message_id);
+    await deleteMessage(msg.chat.id, msg.message_id);
   }
 
   if (msg.text?.toLocaleLowerCase() === "price") {
     await updatePrice();
-    bot.deleteMessage(msg.chat.id, msg.message_id);
+    await deleteMessage(msg.chat.id, msg.message_id);
   }
 });
 
