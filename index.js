@@ -4,9 +4,9 @@ import TelegramBot from "node-telegram-bot-api";
 import fetch from "node-fetch";
 import schedule from "node-schedule";
 
-const { token, groupId, groupName } = process.env;
+const { TG_TOKEN, TG_GROUP_ID, TG_GROUP_NAME } = process.env;
 
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(TG_TOKEN, { polling: true });
 
 bot.addListener("message", async (msg) => {
   if (msg.from.username === "sfm_title_price_bot") {
@@ -38,8 +38,8 @@ const updatePrice = async () => {
     date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
 
   await bot.setChatTitle(
-    groupId,
-    `${groupName} (${price}, ${date.getHours()}:${minutes})`
+    TG_GROUP_ID,
+    `${TG_GROUP_NAME} (${price}, ${date.getHours()}:${minutes})`
   );
 };
 
