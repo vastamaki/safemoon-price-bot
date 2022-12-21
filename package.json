@@ -4,17 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "docker build -t sfm-price:latest .",
+    "tag": "docker tag sfm-price:latest harbor.testbay.io/images/sfm-price:latest",
+    "publish": "docker push harbor.testbay.io/images/sfm-price:latest"
   },
   "author": "Viljami Vastamäki <viljami@vastamaki.dev>",
   "license": "MIT",
   "dependencies": {
-    "cross-fetch": "^3.1.4",
-    "dotenv": "^16.0.0",
-    "node-fetch": "^3.2.3",
+    "dotenv": "^16.0.3",
     "node-schedule": "^2.1.0",
-    "node-telegram-bot-api": "^0.50.0",
-    "web3": "^1.6.1"
+    "node-telegram-bot-api": "^0.60.0"
   },
   "type": "module",
   "target": "es2016"

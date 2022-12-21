@@ -1,7 +1,6 @@
 import "dotenv/config";
 
 import TelegramBot from "node-telegram-bot-api";
-import fetch from "node-fetch";
 import schedule from "node-schedule";
 
 const { TG_TOKEN, TG_GROUP_ID, TG_GROUP_NAME } = process.env;
