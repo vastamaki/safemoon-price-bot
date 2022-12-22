@@ -1,6 +1,8 @@
 version: '3'
 
 services:
-  registry:
+  sfm-bot:
     build:
       dockerfile: Dockerfile
+    env_file:
+      - stack.env
