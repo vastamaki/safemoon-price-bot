@@ -9,4 +9,11 @@ services:
     env_file:
       - stack.env
     restart: unless-stopped
-    network_mode: "host"
+    networks:
+      lan:
+        ipv4_address: 10.10.2.36
+
+networks:
+  lan:
+    name: LAN
+    external: true
